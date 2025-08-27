@@ -48,3 +48,17 @@ Burger burger = builder.AddCheese("Doube Extra Cheese")
                        .Build();
 Console.WriteLine(burger);
 #endregion
+
+#region Prototype
+Console.WriteLine("----------Prototype---------");
+Enemy flyingEnemy1 = new FlyingEnemy(60, 90, "Fire");
+Enemy flyingEnemy2 = flyingEnemy1.Clone();
+flyingEnemy2.SetHealth(70);
+
+Enemy armoredEnemy1 = new ArmoredEnemy(90, 50, "Sword");
+Enemy armoredEnemy2 = armoredEnemy1.Clone();
+Console.WriteLine(flyingEnemy1);
+Console.WriteLine(flyingEnemy2);
+Console.WriteLine(armoredEnemy1);
+Console.WriteLine(armoredEnemy2);
+#endregion
