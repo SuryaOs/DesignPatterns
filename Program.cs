@@ -75,26 +75,35 @@ using File = Structural.File;
 // shape.Draw();
 // #endregion Bridge
 
-#region Composite
+// #region Composite
 // Console.WriteLine("----------Composite---------");
-Folder home = new Folder("Home");
-Folder document = new Folder("Documents");
-Folder images = new Folder("Images");
+// Folder home = new Folder("Home");
+// Folder document = new Folder("Documents");
+// Folder images = new Folder("Images");
 
-IFileSystem file1 = new File("resume.pdf", 300);
-IFileSystem file2 = new File("document.csv", 400);
+// IFileSystem file1 = new File("resume.pdf", 300);
+// IFileSystem file2 = new File("document.csv", 400);
 
-IFileSystem image1 = new File("lotus.png", 400);
+// IFileSystem image1 = new File("lotus.png", 400);
 
-home.Add(document);
-home.Add(images);
+// home.Add(document);
+// home.Add(images);
 
-document.Add(file1);
-document.Add(file2);
+// document.Add(file1);
+// document.Add(file2);
 
-images.Add(image1);
+// images.Add(image1);
 
-home.PrintStructure(" ");
-Console.WriteLine("Total size :" + home.GetSize());
+// home.PrintStructure(" ");
+// Console.WriteLine("Total size :" + home.GetSize());
 
+// #endregion
+
+#region decorator
+Console.WriteLine("----------Decorator---------");
+Coffee plain = new SimpleCoffee();
+CoffeeDecorator dec = new MilkDecorator(plain);
+CoffeeDecorator sug = new SugarDecorator(dec);
+
+Console.WriteLine(sug.GetDetails() + " - " + sug.GetAmount());
 #endregion
