@@ -1,5 +1,6 @@
 using Creational;
 using Structural;
+using File = Structural.File;
 // #region Singleton
 // Console.WriteLine("----------Singleton---------");
 // var logger = Logger.instance;
@@ -64,12 +65,36 @@ using Structural;
 // Console.WriteLine(armoredEnemy2);
 // #endregion
 
-#region Bridge
-Console.WriteLine("----------Bridge---------");
-IRenderer renderer = new RasterRenderer();
-Shape shape = new Circle(renderer, 5);
-shape.Draw();
-renderer = new VectorRenderer();
-shape = new Square(renderer, 5);
-shape.Draw();
-#endregion Bridge
+// #region Bridge
+// Console.WriteLine("----------Bridge---------");
+// IRenderer renderer = new RasterRenderer();
+// Shape shape = new Circle(renderer, 5);
+// shape.Draw();
+// renderer = new VectorRenderer();
+// shape = new Square(renderer, 5);
+// shape.Draw();
+// #endregion Bridge
+
+#region Composite
+// Console.WriteLine("----------Composite---------");
+Folder home = new Folder("Home");
+Folder document = new Folder("Documents");
+Folder images = new Folder("Images");
+
+IFileSystem file1 = new File("resume.pdf", 300);
+IFileSystem file2 = new File("document.csv", 400);
+
+IFileSystem image1 = new File("lotus.png", 400);
+
+home.Add(document);
+home.Add(images);
+
+document.Add(file1);
+document.Add(file2);
+
+images.Add(image1);
+
+home.PrintStructure(" ");
+Console.WriteLine("Total size :" + home.GetSize());
+
+#endregion
