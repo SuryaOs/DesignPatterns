@@ -99,11 +99,25 @@ using File = Structural.File;
 
 // #endregion
 
-#region decorator
-Console.WriteLine("----------Decorator---------");
-Coffee plain = new SimpleCoffee();
-CoffeeDecorator dec = new MilkDecorator(plain);
-CoffeeDecorator sug = new SugarDecorator(dec);
+// #region decorator
+// Console.WriteLine("----------Decorator---------");
+// Coffee plain = new SimpleCoffee();
+// CoffeeDecorator dec = new MilkDecorator(plain);
+// CoffeeDecorator sug = new SugarDecorator(dec);
 
-Console.WriteLine(sug.GetDetails() + " - " + sug.GetAmount());
+// Console.WriteLine(sug.GetDetails() + " - " + sug.GetAmount());
+// #endregion
+
+# region Facade
+Console.WriteLine("------------Facade------------");
+var dvd = new DvdPlayer();
+var projector = new Projector();
+var lights = new Light();
+var sound = new Sound();
+
+HomeTheatreFacade ht = new(lights, dvd, projector, sound);
+ht.WatchMovie("Inception", 100);
+Console.Write("Press any key to end the movie");
+Console.Read();
+ht.EndMovie();
 #endregion
