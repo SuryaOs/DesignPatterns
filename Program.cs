@@ -108,16 +108,30 @@ using File = Structural.File;
 // Console.WriteLine(sug.GetDetails() + " - " + sug.GetAmount());
 // #endregion
 
-# region Facade
-Console.WriteLine("------------Facade------------");
-var dvd = new DvdPlayer();
-var projector = new Projector();
-var lights = new Light();
-var sound = new Sound();
+// # region Facade
+// Console.WriteLine("------------Facade------------");
+// var dvd = new DvdPlayer();
+// var projector = new Projector();
+// var lights = new Light();
+// var sound = new Sound();
 
-HomeTheatreFacade ht = new(lights, dvd, projector, sound);
-ht.WatchMovie("Inception", 100);
-Console.Write("Press any key to end the movie");
-Console.Read();
-ht.EndMovie();
+// HomeTheatreFacade ht = new(lights, dvd, projector, sound);
+// ht.WatchMovie("Inception", 100);
+// Console.Write("Press any key to end the movie");
+// Console.Read();
+// ht.EndMovie();
+// #endregion
+
+#region Flyweight
+// Console.WriteLine("------------Flyweight------------");
+CharacterGlyphs cg = new();
+var str = "Hello world";
+var x = 0;
+foreach (var s in str)
+{
+    x += 5;
+    var c = cg.Get(s, 14);
+    c.show(x, 0);
+}
+Console.WriteLine($"Total characters {str.Length} & Total Instance {cg.count}");
 #endregion
