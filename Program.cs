@@ -122,16 +122,25 @@ using File = Structural.File;
 // ht.EndMovie();
 // #endregion
 
-#region Flyweight
-// Console.WriteLine("------------Flyweight------------");
-CharacterGlyphs cg = new();
-var str = "Hello world";
-var x = 0;
-foreach (var s in str)
-{
-    x += 5;
-    var c = cg.Get(s, 14);
-    c.show(x, 0);
-}
-Console.WriteLine($"Total characters {str.Length} & Total Instance {cg.count}");
+// #region Flyweight
+// // Console.WriteLine("------------Flyweight------------");
+// CharacterGlyphs cg = new();
+// var str = "Hello world";
+// var x = 0;
+// foreach (var s in str)
+// {
+//     x += 5;
+//     var c = cg.Get(s, 14);
+//     c.show(x, 0);
+// }
+// Console.WriteLine($"Total characters {str.Length} & Total Instance {cg.count}");
+// #endregion
+
+#region Proxy
+ImageProxy proxy = new("Image One");
+ImageProxy proxyTwo = new("Image Two");
+ImageProxy proxyThree = new("Image Three");
+
+proxy.Display();
+proxy.Display(); // displaying from cache (if users closes image and opens again in gallery app)
 #endregion
