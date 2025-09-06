@@ -147,8 +147,8 @@ using File = Structural.File;
 // proxy.Display(); // displaying from cache (if users closes image and opens again in gallery app)
 // #endregion
 
-#region Iterator
-Console.WriteLine("------------Iterator------------");
+// #region Iterator
+// Console.WriteLine("------------Iterator------------");
 // MusicPlayer mp = new MusicPlayer(10);
 // mp.Add("Kombe Sura");
 // mp.Add("ennavale adi ennavale");
@@ -162,15 +162,25 @@ Console.WriteLine("------------Iterator------------");
 //     Console.WriteLine(iterator.next() ?? "No Songs Found");
 // }
 
-VLCPlayer vp = new(10);
-vp.Add("Bad Tamessuuh");
-vp.Add("Vaa Maduraaa Anna Kodi");
-vp.Add("When I m back in chicagoo I feeel eehh anotherrr version off meeee I was innnn it");
-vp.Add("some mistakes get made that's alright thats okay in the end its better for me its the morale of the story huh uh uh uh uh uh");
-vp.Add("when I get older i ll be stronger they ll call me freedom just like a wavin' flag then it goes back oh oh oh oh oh");
+// VLCPlayer vp = new(10);
+// vp.Add("Bad Tamessuuh");
+// vp.Add("Vaa Maduraaa Anna Kodi");
+// vp.Add("When I m back in chicagoo I feeel eehh anotherrr version off meeee I was innnn it");
+// vp.Add("some mistakes get made that's alright thats okay in the end its better for me its the morale of the story huh uh uh uh uh uh");
+// vp.Add("when I get older i ll be stronger they ll call me freedom just like a wavin' flag then it goes back oh oh oh oh oh");
 
-foreach (var song in vp)
-{
-    Console.WriteLine(song ?? "Nooooo");
-}
+// foreach (var song in vp)
+// {
+//     Console.WriteLine(song ?? "Nooooo");
+// }
+// #endregion
+
+#region Observer
+Console.WriteLine("------------Observer------------");
+ISubject ip = new IPhone();
+ISubscriber custOne = new UserOne();
+ip.Subscribe(custOne);
+
+ip.Launch();
+
 #endregion
