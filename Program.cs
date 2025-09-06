@@ -175,12 +175,22 @@ using File = Structural.File;
 // }
 // #endregion
 
-#region Observer
-Console.WriteLine("------------Observer------------");
-ISubject ip = new IPhone();
-ISubscriber custOne = new UserOne();
-ip.Subscribe(custOne);
+// #region Observer
+// Console.WriteLine("------------Observer------------");
+// ISubject ip = new IPhone();
+// ISubscriber custOne = new UserOne();
+// ip.Subscribe(custOne);
 
-ip.Launch();
+// ip.Launch();
 
+// #endregion
+
+# region
+// Console.WriteLine("------------Strategy------------");
+IPaymentStrategy paymentStrategy = new UPI();
+ShoppingCart cart = new(paymentStrategy);
+cart.Checkout();
+
+cart.SetStrategy(new CreditCard());
+cart.Checkout();
 #endregion
