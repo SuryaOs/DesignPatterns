@@ -185,12 +185,20 @@ using File = Structural.File;
 
 // #endregion
 
-# region
-// Console.WriteLine("------------Strategy------------");
-IPaymentStrategy paymentStrategy = new UPI();
-ShoppingCart cart = new(paymentStrategy);
-cart.Checkout();
+// # region Strategy
+// // Console.WriteLine("------------Strategy------------");
+// IPaymentStrategy paymentStrategy = new UPI();
+// ShoppingCart cart = new(paymentStrategy);
+// cart.Checkout();
 
-cart.SetStrategy(new CreditCard());
-cart.Checkout();
+// cart.SetStrategy(new CreditCard());
+// cart.Checkout();
+// #endregion
+
+#region Command
+Console.WriteLine("------------Command------------");
+Behavioral.Light light = new(); // create receiver
+ICommand turnOnLight = new LightOnCommand(light); // create command (action encapsulated/wrappe as an object)
+Remote remote = new(turnOnLight); // create invoker. remove doesn't know what command it does internally. it just executes/undo.
+remote.Execute(); // execute later
 #endregion
