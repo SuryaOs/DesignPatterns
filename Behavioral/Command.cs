@@ -21,6 +21,11 @@ namespace Behavioral;
             you pass in any action, remote control will perform.
         queue requests, schedule operations, or log operations
         support undo/redo functionality
+
+    RemoteControl -> has many buttons
+    Button -> hold each command
+    Command -> knows how to operate a receiver
+    Receiver -> actual device: Light, GarageDoor, MusicPlayer
 */
 #endregion
 public interface ICommand
@@ -71,18 +76,69 @@ public class LightOffCommand : ICommand // command
         light.On();
     }
 }
-public class Remote // invoker
+
+public class Garage // Receiver
 {
-    private ICommand command;
-    private List<ICommand> history = new();
-    public Remote(ICommand command)
+    public void Open()
     {
-        this.command = command;
+        Console.WriteLine("Openeing the Garage");
+    }
+    public void Close()
+    {
+        Console.WriteLine("Closing the garage");
+    }
+}
+public class OpenTheGarageCommand : ICommand
+{
+    private Garage _garage;
+    public OpenTheGarageCommand(Garage garage)
+    {
+        _garage = garage;
     }
     public void Execute()
     {
-        command.Execute();
-        history.Add(command);
+        _garage.Open();
+    }
+
+    public void Undo()
+    {
+        _garage.Close();
+    }
+}
+public class CloseTheGarageCommand : ICommand
+{
+    private Garage _garage;
+    public CloseTheGarageCommand(Garage garage)
+    {
+        _garage = garage;
+    }
+    public void Execute()
+    {
+        _garage.Close();
+    }
+
+    public void Undo()
+    {
+        _garage.Open();
+    }
+}
+
+public class Remote // invoker
+{
+    private ICommand[] _command;
+    private List<ICommand> history = new();
+    public Remote(int buttonCount)
+    {
+        _command = new ICommand[buttonCount];
+    }
+    public void SetCommand(ICommand command, int buttonIndex)
+    {
+        _command[buttonIndex] = command;
+    }
+    public void Execute(int index)
+    {
+        _command[index].Execute();
+        history.Add(_command[index]);
     }
     public void UndoLastAction()
     {

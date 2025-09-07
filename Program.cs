@@ -197,8 +197,19 @@ using File = Structural.File;
 
 #region Command
 Console.WriteLine("------------Command------------");
-Behavioral.Light light = new(); // create receiver
-ICommand turnOnLight = new LightOnCommand(light); // create command (action encapsulated/wrappe as an object)
-Remote remote = new(turnOnLight); // create invoker. remove doesn't know what command it does internally. it just executes/undo.
-remote.Execute(); // execute later
+
+// Create Receiver
+Behavioral.Light light = new();
+Garage garage = new();
+
+// create command (action encapsulated/wrapped as an object)
+ICommand turnOnLight = new LightOnCommand(light);
+ICommand openTheGarage = new OpenTheGarageCommand(garage);
+
+// create invoker. remote doesn't know what command it does internally. it just executes/undo.
+Remote remote = new(2);
+remote.SetCommand(turnOnLight, 0);
+remote.SetCommand(openTheGarage, 1);
+remote.Execute(0); // execute later
+remote.Execute(1);
 #endregion
