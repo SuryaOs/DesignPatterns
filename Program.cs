@@ -195,21 +195,35 @@ using File = Structural.File;
 // cart.Checkout();
 // #endregion
 
-#region Command
-Console.WriteLine("------------Command------------");
+// #region Command
+// Console.WriteLine("------------Command------------");
 
-// Create Receiver
-Behavioral.Light light = new();
-Garage garage = new();
+// // Create Receiver
+// Behavioral.Light light = new();
+// Garage garage = new();
 
-// create command (action encapsulated/wrapped as an object)
-ICommand turnOnLight = new LightOnCommand(light);
-ICommand openTheGarage = new OpenTheGarageCommand(garage);
+// // create command (action encapsulated/wrapped as an object)
+// ICommand turnOnLight = new LightOnCommand(light);
+// ICommand openTheGarage = new OpenTheGarageCommand(garage);
 
-// create invoker. remote doesn't know what command it does internally. it just executes/undo.
-Remote remote = new(2);
-remote.SetCommand(turnOnLight, 0);
-remote.SetCommand(openTheGarage, 1);
-remote.Execute(0); // execute later
-remote.Execute(1);
+// // create invoker. remote doesn't know what command it does internally. it just executes/undo.
+// Remote remote = new(2);
+// remote.SetCommand(turnOnLight, 0);
+// remote.SetCommand(openTheGarage, 1);
+// remote.Execute(0); // execute later
+// remote.Execute(1);
+// #endregion
+
+#region State
+Console.WriteLine("-----------State---------------");
+ATM atm = new(1000);
+atm.EnterPin(123); // Insert Card First
+atm.InsertCard();
+atm.WithdrawAmount(1001); // Enter Pin 
+atm.EnterPin(12345); // Invalid PIn
+atm.EnterPin(1234); // Insert Card First
+atm.InsertCard();
+atm.EnterPin(1234);
+atm.WithdrawAmount(900);
+atm.WithdrawAmount(200);
 #endregion
