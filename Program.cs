@@ -1,6 +1,7 @@
 using Behavioral;
 using Creational;
 using Structural;
+using Template;
 using File = Structural.File;
 // #region Singleton
 // Console.WriteLine("----------Singleton---------");
@@ -214,16 +215,26 @@ using File = Structural.File;
 // remote.Execute(1);
 // #endregion
 
-#region State
-Console.WriteLine("-----------State---------------");
-ATM atm = new(1000);
-atm.EnterPin(123); // Insert Card First
-atm.InsertCard();
-atm.WithdrawAmount(1001); // Enter Pin 
-atm.EnterPin(12345); // Invalid PIn
-atm.EnterPin(1234); // Insert Card First
-atm.InsertCard();
-atm.EnterPin(1234);
-atm.WithdrawAmount(900);
-atm.WithdrawAmount(200);
+// #region State
+// Console.WriteLine("-----------State---------------");
+// ATM atm = new(1000);
+// atm.EnterPin(123); // Insert Card First
+// atm.InsertCard();
+// atm.WithdrawAmount(1001); // Enter Pin 
+// atm.EnterPin(12345); // Invalid PIn
+// atm.EnterPin(1234); // Insert Card First
+// atm.InsertCard();
+// atm.EnterPin(1234);
+// atm.WithdrawAmount(900);
+// atm.WithdrawAmount(200);
+// #endregion
+
+#region Template
+Console.WriteLine("-----------Template-----------");
+PaymentProcessor paymentProcessor;
+paymentProcessor = new CreditCardPayment();
+paymentProcessor.Process();
+
+paymentProcessor = new UPIPayment();
+paymentProcessor.Process();
 #endregion
