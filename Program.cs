@@ -229,12 +229,27 @@ using File = Structural.File;
 // atm.WithdrawAmount(200);
 // #endregion
 
-#region Template
-Console.WriteLine("-----------Template-----------");
-PaymentProcessor paymentProcessor;
-paymentProcessor = new CreditCardPayment();
-paymentProcessor.Process();
+// #region Template
+// Console.WriteLine("-----------Template-----------");
+// PaymentProcessor paymentProcessor;
+// paymentProcessor = new CreditCardPayment();
+// paymentProcessor.Process();
 
-paymentProcessor = new UPIPayment();
-paymentProcessor.Process();
+// paymentProcessor = new UPIPayment();
+// paymentProcessor.Process();
+// #endregion
+
+#region Visitor
+Console.WriteLine("-----------Template-----------");
+IVisitor renderer = new Renderer();
+IElement[] elements =
+{
+    new Text("Hello World"),
+    new Behavioral.Image("assets/src/logo"),
+    new Link("www.raster.com/images")
+};
+foreach (var el in elements)
+{
+    el.Accept(renderer);
+}
 #endregion
