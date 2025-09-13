@@ -254,17 +254,36 @@ using File = Structural.File;
 // }
 // #endregion
 
-#region Mediator
-Console.WriteLine("-----------Mediator-----------");
-ChatRoom chatRoom = new();
+// #region Mediator
+// Console.WriteLine("-----------Mediator-----------");
+// ChatRoom chatRoom = new();
 
-ConcreteUser user1 = new("Alice");
-ConcreteUser user2 = new("Border");
-ConcreteUser user3 = new("Land");
-chatRoom.RegisterUser(user1);
-chatRoom.RegisterUser(user2);
-chatRoom.RegisterUser(user3);
+// ConcreteUser user1 = new("Alice");
+// ConcreteUser user2 = new("Border");
+// ConcreteUser user3 = new("Land");
+// chatRoom.RegisterUser(user1);
+// chatRoom.RegisterUser(user2);
+// chatRoom.RegisterUser(user3);
 
-user1.Send("Hello All");
-user2.Send("Whats Up Alice?");
+// user1.Send("Hello All");
+// user2.Send("Whats Up Alice?");
+// #endregion
+
+#region Memento
+Console.WriteLine("-----------Memento-----------");
+TextEditor textEditor = new();
+History history = new(textEditor);
+textEditor.Set("Hello ");
+history.Push();
+textEditor.Set("World ");
+history.Push();
+textEditor.Set("ZzzzWZz ");
+
+Console.WriteLine("Current: " + textEditor.Get());
+history.Pop();
+Console.WriteLine("Current: " + textEditor.Get());
+history.Pop();
+Console.WriteLine("Current: " + textEditor.Get());
+history.Pop();
+
 #endregion
