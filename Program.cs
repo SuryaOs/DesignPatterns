@@ -239,17 +239,32 @@ using File = Structural.File;
 // paymentProcessor.Process();
 // #endregion
 
-#region Visitor
-Console.WriteLine("-----------Template-----------");
-IVisitor renderer = new Renderer();
-IElement[] elements =
-{
-    new Text("Hello World"),
-    new Behavioral.Image("assets/src/logo"),
-    new Link("www.raster.com/images")
-};
-foreach (var el in elements)
-{
-    el.Accept(renderer);
-}
+// #region Visitor
+// Console.WriteLine("-----------Template-----------");
+// IVisitor renderer = new Renderer();
+// IElement[] elements =
+// {
+//     new Text("Hello World"),
+//     new Behavioral.Image("assets/src/logo"),
+//     new Link("www.raster.com/images")
+// };
+// foreach (var el in elements)
+// {
+//     el.Accept(renderer);
+// }
+// #endregion
+
+#region Mediator
+Console.WriteLine("-----------Mediator-----------");
+ChatRoom chatRoom = new();
+
+ConcreteUser user1 = new("Alice");
+ConcreteUser user2 = new("Border");
+ConcreteUser user3 = new("Land");
+chatRoom.RegisterUser(user1);
+chatRoom.RegisterUser(user2);
+chatRoom.RegisterUser(user3);
+
+user1.Send("Hello All");
+user2.Send("Whats Up Alice?");
 #endregion
