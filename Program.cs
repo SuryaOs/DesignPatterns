@@ -269,21 +269,36 @@ using File = Structural.File;
 // user2.Send("Whats Up Alice?");
 // #endregion
 
-#region Memento
-Console.WriteLine("-----------Memento-----------");
-TextEditor textEditor = new();
-History history = new(textEditor);
-textEditor.Set("Hello ");
-history.Push();
-textEditor.Set("World ");
-history.Push();
-textEditor.Set("ZzzzWZz ");
+// #region Memento
+// Console.WriteLine("-----------Memento-----------");
+// TextEditor textEditor = new();
+// History history = new(textEditor);
+// textEditor.Set("Hello ");
+// history.Push();
+// textEditor.Set("World ");
+// history.Push();
+// textEditor.Set("ZzzzWZz ");
 
-Console.WriteLine("Current: " + textEditor.Get());
-history.Pop();
-Console.WriteLine("Current: " + textEditor.Get());
-history.Pop();
-Console.WriteLine("Current: " + textEditor.Get());
-history.Pop();
+// Console.WriteLine("Current: " + textEditor.Get());
+// history.Pop();
+// Console.WriteLine("Current: " + textEditor.Get());
+// history.Pop();
+// Console.WriteLine("Current: " + textEditor.Get());
+// history.Pop();
+
+// #endregion
+
+#region Chain Of Responsibility
+Console.WriteLine("-----------Chain Of Responsibility-----------");
+var baseLogger = new BaseLogger();
+var infoLogger = new InfoLogger();
+var warningLogger = new WarningLogger();
+var errorLogger = new ErrorLogger();
+
+baseLogger.SetNext(infoLogger);
+infoLogger.SetNext(warningLogger);
+warningLogger.SetNext(errorLogger);
+
+baseLogger.Log("this is tet message", LogLevelEnum.Error);
 
 #endregion
