@@ -1,4 +1,5 @@
 using Behavioral;
+using Concurrency.ThreadPool;
 using Creational;
 using Structural;
 using Template;
@@ -220,7 +221,7 @@ using File = Structural.File;
 // ATM atm = new(1000);
 // atm.EnterPin(123); // Insert Card First
 // atm.InsertCard();
-// atm.WithdrawAmount(1001); // Enter Pin 
+// atm.WithdrawAmount(1001); // Enter Pin
 // atm.EnterPin(12345); // Invalid PIn
 // atm.EnterPin(1234); // Insert Card First
 // atm.InsertCard();
@@ -288,17 +289,21 @@ using File = Structural.File;
 
 // #endregion
 
-#region Chain Of Responsibility
-Console.WriteLine("-----------Chain Of Responsibility-----------");
-var baseLogger = new BaseLogger();
-var infoLogger = new InfoLogger();
-var warningLogger = new WarningLogger();
-var errorLogger = new ErrorLogger();
+// #region Chain Of Responsibility
+// Console.WriteLine("-----------Chain Of Responsibility-----------");
+// var baseLogger = new BaseLogger();
+// var infoLogger = new InfoLogger();
+// var warningLogger = new WarningLogger();
+// var errorLogger = new ErrorLogger();
 
-baseLogger.SetNext(infoLogger);
-infoLogger.SetNext(warningLogger);
-warningLogger.SetNext(errorLogger);
+// baseLogger.SetNext(infoLogger);
+// infoLogger.SetNext(warningLogger);
+// warningLogger.SetNext(errorLogger);
 
-baseLogger.Log("this is tet message", LogLevelEnum.Error);
+// baseLogger.Log("this is tet message", LogLevelEnum.Error);
 
+// #endregion
+
+#region Concurrency
+ThreadPoolFacade.Run();
 #endregion
