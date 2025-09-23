@@ -1,6 +1,6 @@
 using System.Collections.Concurrent;
 
-namespace Concurrency.ThreadPool;
+namespace Concurrency;
 
 /*
 
@@ -34,10 +34,10 @@ tldr: when you run a task, instead of creating new thread, re-use thread from th
 public class SimpleThreadPool
 {
     // Thread-safe, blocking queue holding action delegates (tasks to run)
-    private BlockingCollection<Action> _taskQueue;
+    private BlockingCollection<Action> _taskQueue; // shared data structure
 
     // Fixed-size array of threads
-    private readonly Thread[] _workers;
+    private readonly Thread[] _workers; // consumers
 
     public SimpleThreadPool(int numberOfThreads)
     {
@@ -75,7 +75,7 @@ public class SimpleThreadPool
         // checks is completeadding() is not called to prevent adding after shutdown
         if (!_taskQueue.IsAddingCompleted)
         {
-            _taskQueue.Add(task);
+            _taskQueue.Add(task); // producer adding work to the queue/ds
         }
     }
 
@@ -92,6 +92,50 @@ public class SimpleThreadPool
     }
 }
 
+public class InBuiltThreadPool
+{
+    public static void Run()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            int task = i;
+            ThreadPool.QueueUserWorkItem(DoWork, task);
+        }
+        Console.WriteLine("Tasks Started.. Press any key to exit");
+        Console.ReadKey();
+    }
+    private static void DoWork(object state)
+    {
+        int task = (int)state;
+        Console.WriteLine($"Task {task} started on thread {Thread.CurrentThread.ManagedThreadId}");
+        Thread.Sleep(1000);
+        Console.WriteLine($"Task {task} completed");
+    }
+}
+public class TPL
+{
+    public static void Run()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            int task = i;
+            Task.Run(() => DoWork(task));
+        }
+        Console.WriteLine("Tasks Started.. Press any key to exit");
+        Console.ReadKey(); // without readkey, the program ends before task finishes
+                           // can also use task.waitAll or await Task.WhenAll
+                           // waitAll is used in synchronous code, returns void, blocks thread
+                           // whenAll is used in asynchronous code, returns Task, non-blocker
+
+    }
+    private static void DoWork(int state)
+    {
+        int task = (int)state;
+        Console.WriteLine($"Task {task} started on thread {Thread.CurrentThread.ManagedThreadId}");
+        Task.Delay(1000);
+        Console.WriteLine($"Task {task} completed");
+    }
+}
 public class ThreadPoolFacade
 {
     public static void Run()
